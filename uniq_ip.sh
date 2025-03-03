@@ -1,11 +1,15 @@
 #!/bin/bash
 
-
 # Get the server's public IP
 server_ip=$(curl -s ipinfo.io/ip)
 
-# Ask the user for the time range (e.g., "2" for logs from 2 hours ago)
-read -p "Enter the number of hours ago to filter logs from: " hours_ago
+# Check if an argument is provided
+if [[ -z "$1" ]]; then
+    echo "Usage: $0 <number_of_hours>"
+    exit 1
+fi
+
+hours_ago="$1"
 
 # Validate input (ensure it's a positive integer)
 if ! [[ "$hours_ago" =~ ^[0-9]+$ ]]; then
@@ -44,5 +48,3 @@ done
 
 # Print footer
 echo -e "\e[1;34m──────────────────────────────────────────────────────────────────────────────────────────\e[0m"
-
-apache_phpstack-1198695-5297284.cloudwaysapps.com
